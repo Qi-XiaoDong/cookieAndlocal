@@ -47,3 +47,64 @@ cookie 存储 和本地存储
   // 2. Secure: 这是cookie 只可以通过https协议传输
   // SameSite： 跨域请求时cookie不被发送
 ```
+
+## cookie 封装
+
+```js
+   <script>
+    /**
+     * 封装cookie增删改查
+     */
+    var cookieApi = {
+      /**
+       * 设置cookie
+       */
+      setCookie(name, value, date){
+        /**
+         * expires:设置的是一个时刻 GTML格式
+        */
+        // var endDate = new Date(); // 当前的时刻
+        // endDate.setDate(endDate.getDate() + date);
+        // document.cookie = name + "=" + value + "; expires=" + endDate;
+        /**
+         * max-age : 设置的是一个时间段毫秒为单位
+         * **/
+        document.cookie = name + "=" + value + "; max-age=" + date;
+      },
+      /**
+       * 删除cookie
+      */
+      removeCookie(name){
+        this.setCookie(name, "", 0);
+      },
+      /***
+       * 获取cookie
+      */
+      getCookie(name){
+        var cookieStr = document.cookie;
+        var cookieArr = cookieStr.split("; ");
+        const cookieObj = {};
+        for (var i = 0; i < cookieArr.length; i++){
+          const cookie = cookieArr[i].split("=");
+          // 不传递name：表示获取所有的cookie
+          if (!name) {
+            cookieObj[cookie[0]] = cookie[1];
+          }
+          // 获取某一个cookie
+          if (name === cookie[0]) {
+            cookieObj[name] = cookie[1];
+            break;
+          }
+        }
+        return cookieObj;
+      },
+      /**
+        * 获取全部cookie
+      */
+        getAllCookie(){
+          return this.getCookie();
+        }
+    }
+  </script>
+
+````
