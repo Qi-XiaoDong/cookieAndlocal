@@ -151,3 +151,17 @@ cookie 存储 和本地存储
   localStorage.getItem("color");
 
 ```
+
+- 监听 storage 改变 **主动改变的页面不触发，其他页面触发**
+
+```js
+     window.addEventListener("storage", (ev) => {
+       /**
+        * ev.key: 改变的storage的name
+        * ev.newValue: 改变后的值
+        * ev.oldValue: 改变前的值
+        * ev.storage: 改变后整个storeage对象
+        * ev.url: 改变storeage所在的页面路径
+       */
+    } );
+```

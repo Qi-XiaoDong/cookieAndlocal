@@ -19,6 +19,11 @@
     console.log(JSON.parse(localStorage.getItem("colorObj")));
 
     console.log(JSON.parse(localStorage.getItem("colorArr")));
+
+    /***************************监听storage改变*********************************/
+    window.addEventListener("storage", (ev) => {
+      console.log(ev)
+    } );
   </script>
 </body>
 </html>
