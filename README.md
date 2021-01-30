@@ -48,7 +48,7 @@ cookie 存储 和本地存储
   // SameSite： 跨域请求时cookie不被发送
 ```
 
-## cookie 封装
+### cookie 封装
 
 ```js
    <script>
@@ -108,3 +108,46 @@ cookie 存储 和本地存储
   </script>
 
 ````
+
+## 存储 (Storeage内置对象**不依赖于http协议**)
+
+- 优势
+
+> 1. 存储量大
+> 2. 不会随请求发送，节省资源
+> 3. 有原生的Api进行怎删改查
+> 4. 不能跨域**和cookie一样**
+> 5. 无痕模式可删除本地存储
+
+- LocalStorage: 本地的存储，域名下所有的页面有效
+
+- sessionStore: 会话存储，仅在当前窗口有效
+
+- 属性和方法
+
+- - length：本地数据存储的数量
+
+- - key(): 通过索引去找到存储的数据
+
+- - getItem(): 通过键名取到存储的数据
+
+- - setItem(): 设置一个本地存储数据
+
+- - removeItem()： 删除指定键名的本地数据
+
+- - clear(): 清空本地数据
+
+### 存储注意
+
+> 会将引用值转换为字符串存储
+
+```js
+  var colorArr = ["red", "green"]
+
+  var colorObj = {"red" : "#f00", "block": "#000"};
+
+  localStorage.setItem("color", JSON.stringify(colorObj));
+
+  localStorage.getItem("color");
+
+```
